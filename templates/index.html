@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo LIS - Desafio de Programação Dinâmica</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span style="font-size: 1.1rem; color: #94a3b8; font-weight: bold;">FASE {{ nivel }} de 5</span>
+            <a href="/reset" style="color: #ef4444; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: 1px solid #ef4444; padding: 5px 10px; border-radius: 6px; transition: 0.2s;">Recomeçar ⟲</a>
+        </div>
+
+        <h1>🎮 Desafio da LIS</h1>
+        <p>Clique nos números abaixo na ordem correta para formar a Maior Subsequência Crescente:</p>
+
+        <div class="sequencia-container">
+            {% for num in sequencia %}
+                <div class="numero-card js-card" data-valor="{{ num }}" data-index="{{ loop.index0 }}">{{ num }}</div>
+            {% endfor %}
+        </div>
+
+        {% if resultado != "acertou" %}
+            <form method="POST" id="jogo-form">
+                <input type="text" name="resposta" id="resposta-input" autocomplete="off"
+                    placeholder="Clique nos números acima..."
+                    value="{{ resposta }}" readonly>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit">Enviar Jogada</button>
+                    <button type="button" id="btn-limpar" style="background: #475569;">Limpar</button>
+                </div>
+            </form>
+        {% endif %}
+
+        {% if resultado == "acertou" %}
+            <div class="alert ok">🎉 Você acertou! Ótimo raciocínio lógico!</div>
+            <div style="margin: 20px 0;">
+                <a href="/proxima" class="btn-avancar">Avançar para o Próximo Nível ➔</a>
+            </div>
+        {% elif resultado == "errou" %}
+            <div class="alert erro">❌ Você errou! Tente analisar os subproblemas novamente ou use o botão "Limpar" para refazer.</div>
+        {% endif %}
+
+        {% if resultado %}
+            <hr>
+            <div class="panel-pd">
+                <h3>🏆 Resolução via Programação Dinâmica (PD)</h3>
+                <p><b>Solução Ótima Correta:</b> <span style="color: #4ade80;">{{ solucao }}</span></p>
+                
+                <div class="table-responsive">
+                    <table class="tabela-pd">
+                        <thead>
+                            <tr>
+                                <th>Índice (i)</th>
+                                {% for i in range(sequencia|length) %} <th>{{ i }}</th> {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Vetor Original</th>
+                                {% for num in sequencia %} <td>{{ num }}</td> {% endfor %}
+                            </tr>
+                            <tr class="destaque-dp">
+                                <th>Tabela DP</th>
+                                {% for valor in dp %} <td>{{ valor }}</td> {% endfor %}
+                            </tr>
+                            <tr class="destaque-pre">
+                                <th>Predecessor (Pre)</th>
+                                {% for pai in pre %} <td>{{ pai }}</td> {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p style="font-size: 0.85rem; color: #64748b; margin-top: 15px; line-height: 1.4;">
+                    * <b>Tabela DP:</b> Indica o tamanho da maior subsequência que termina neste número.<br>
+                    * <b>Predecessor:</b> Indica o índice do número anterior que gerou esse tamanho ideal.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cards = document.querySelectorAll(".js-card");
+            const inputResposta = document.getElementById("resposta-input");
+            const btnLimpar = document.getElementById("btn-limpar");
+            
+            let selecionados = [];
+
+            if (!document.getElementById("jogo-form")) return;
+
+            function limparSelecao() {
+                selecionados = [];
+                inputResposta.value = "";
+                cards.forEach(c => c.classList.remove("selecionado"));
+            }
+
+            if (btnLimpar) {
+                btnLimpar.addEventListener("click", limparSelecao);
+            }
+
+            cards.forEach(card => {
+                card.style.cursor = "pointer";
+
+                card.addEventListener("click", function() {
+                    const valor = this.getAttribute("data-valor");
+                    const index = this.getAttribute("data-index");
+
+                    const jaSelecionadoIdx = selecionados.findIndex(item => item.index === index);
+
+                    if (jaSelecionadoIdx !== -1) {
+                        selecionados.splice(jaSelecionadoIdx, 1);
+                        this.classList.remove("selecionado");
+                    } else {
+                        selecionados.push({ valor: valor, index: index });
+                        this.classList.add("selecionado");
+                    }
+
+                    inputResposta.value = selecionados.map(item => item.valor).join(" ");
+                });
+            });
+
+            limparSelecao();
+        });
+    </script>
+
+</body>
+</html>

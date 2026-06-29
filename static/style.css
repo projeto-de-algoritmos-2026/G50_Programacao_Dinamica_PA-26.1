@@ -1,0 +1,193 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f172a; 
+    color: #f8fafc;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    background: #1e293b; 
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+    
+    margin: 0 auto; 
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #38bdf8;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.sequencia-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+    flex-wrap: wrap; 
+}
+
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.tabela-pd th, .tabela-pd td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #334155;
+    min-width: 35px; 
+}
+
+.numero-card {
+    background: #334155;
+    border: 2px solid #475569;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    min-width: 35px;
+    transition: transform 0.2s;
+    
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+}
+
+.btn-avancar {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: #0284c7;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.btn-avancar:hover {
+    background: #0369a1;
+}
+
+.numero-card:hover {
+    transform: translateY(-3px);
+    border-color: #38bdf8;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+input {
+    padding: 14px;
+    width: 65%;
+    border-radius: 8px;
+    border: 2px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #38bdf8;
+}
+
+button {
+    padding: 14px 24px;
+    background: #22c55e;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #16a34a;
+    transform: scale(1.02);
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.ok { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+.erro { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #334155;
+    margin: 40px 0;
+}
+
+.panel-pd {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid #334155;
+}
+
+.panel-pd h3 {
+    margin-top: 0;
+    color: #f1f5f9;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+}
+
+.tabela-pd {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tabela-pd th, .tabela-pd td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+.tabela-pd th {
+    background: #1e293b;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.tabela-pd td {
+    font-weight: bold;
+}
+
+.numero-card.selecionado {
+    background: #0284c7; 
+    border-color: #38bdf8; 
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+.destaque-dp { color: #f59e0b; } 
+.destaque-pre { color: #a855f7; } 
